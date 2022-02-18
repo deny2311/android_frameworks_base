@@ -68,14 +68,21 @@ LOCAL_REQUIRED_MODULES := \
     IconPackOOSSettingsOverlay \
     IconPackOOSSystemUIOverlay \
     IconPackOOSThemePickerOverlay \
-	IconShapeCylinderOverlay \
+    IconPackOutlineAndroidOverlay \
+    IconPackOutlineSettingsOverlay \
+    IconPackOutlineSystemUIOverlay \
+	IconShapeCloudyOverlay \
+    IconShapeCylinderOverlay \
+    IconShapeFlowerOverlay \
     IconShapeHeartOverlay \
     IconShapeHexagonOverlay \
     IconShapeLeafOverlay \
     IconShapePebbleOverlay \
+    IconShapeRoundedHexagonOverlay \
     IconShapeRoundedRectOverlay \
     IconShapeSquareOverlay \
     IconShapeSquircleOverlay \
+    IconShapeStretchedOverlay \
     IconShapeTaperedRectOverlay \
     IconShapeTeardropOverlay \
     IconShapeVesselOverlay \

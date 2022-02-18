@@ -5388,6 +5388,12 @@ public final class Settings {
          * @hide
          */
         public static final String VOLUME_PANEL_ON_LEFT = "volume_panel_on_left";
+		
+		/**
+         * Whether or not volume button music controls should be enabled to seek media tracks
+         * @hide
+         */
+        public static final String VOLBTN_MUSIC_CONTROLS = "volbtn_music_controls";
 
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
@@ -5516,12 +5522,6 @@ public final class Settings {
          */
         @Readable
         public static final String VOLUME_ROCKER_WAKE = "volume_rocker_wake";
-
-        /**
-         * @hide
-         */
-        @Readable
-        public static final String VOLUME_BUTTON_MUSIC_CONTROL = "volume_button_music_control";
 
         /**
          * Whether to display 4G icon instead LTE
@@ -5929,23 +5929,6 @@ public final class Settings {
                 "notification_guts_kill_app_button";
 
         /**
-         * Status bar carrier label
-         * 0: Hide
-         * 1: Display on keyguard status bar
-         * 2: Display on Normal status bar
-         * 3: Enabled for both
-         * @hide
-         */
-        public static final String STATUS_BAR_SHOW_CARRIER = "status_bar_show_carrier";
-
-        /**
-         * custom carrier label. The value is
-         * String.
-         * @hide
-         */
-        public static final String CUSTOM_CARRIER_LABEL = "custom_carrier_label";
-
-        /**
          * Whether to show the battery info on the lockscreen while charging
          * @hide
          */
@@ -6283,6 +6266,12 @@ public final class Settings {
         public static final String VOLUME_DIALOG_TIMEOUT = "volume_dialog_timeout";
 
         /**
+         * Whether to enable the ripple animation on fingerprint unlock
+         * @hide
+         */
+        public static final String ENABLE_RIPPLE_EFFECT = "enable_ripple_effect";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
@@ -6456,13 +6445,37 @@ public final class Settings {
          * @hide
          */
         public static final String OMNI_CUSTOM_FP_ICON = "custom_fingerprint_icon";
+	
+        /**
+         * Show app volume rows in volume panel
+         * @hide
+         */
+        public static final String SHOW_APP_VOLUME = "show_app_volume";
 		
-		/**
+        /**
          * Whether to show floating rotation button
          * @hide
          */
         @Readable
-        public static final String ENABLE_FLOATING_ROTATION_BUTTON = "enable_floating_rotation_button";
+        public static final String ENABLE_FLOATING_ROTATION_BUTTON = "enable_floating_rotation_button";	
+
+	/**
+         * Whether to enable Photos unlimited storage
+         * @hide
+         */
+        public static final String USE_PHOTOS_SPOOF = "use_photos_spoof";
+		
+		/**
+         * Whether to enable spoofing for streaming apps
+         * @hide
+         */
+        public static final String USE_STREAM_SPOOF = "use_stream_spoof";
+		
+		/**
+         * Force full screen for devices with cutout
+         * @hide
+         */
+        public static final String FORCE_FULLSCREEN_CUTOUT_APPS = "force_full_screen_cutout_apps";
 		
 		/**
          * These are all public system settings
@@ -11563,6 +11576,54 @@ public final class Settings {
          * @hide
          */
         public static final String ENABLE_CAMERA_PRIVACY_INDICATOR = "enable_camera_privacy_indicator";
+		
+		/**
+         * Whether tethering is allowed to use VPN upstreams
+         */
+        @SuppressLint("NoSettingsProvider")
+        public static final String TETHERING_ALLOW_VPN_UPSTREAMS = "tethering_allow_vpn_upstreams";
+
+        /**
+         * Accurate shades (default 1)
+         * @hide
+         */
+        @Readable
+        public static final String MONET_ENGINE_ACCURATE_SHADES = "monet_engine_accurate_shades";
+
+        /**
+         * Color override (default null)
+         * @hide
+         */
+        @Readable
+        public static final String MONET_ENGINE_COLOR_OVERRIDE = "monet_engine_color_override";
+
+        /**
+         * Custom Color override (default null)
+         * @hide
+         */
+        @Readable
+        public static final String MONET_ENGINE_CUSTOM_COLOR = "monet_engine_custom_color";
+
+        /**
+         * Colorfulness (default 1.0)
+         * @hide
+         */
+        @Readable
+        public static final String MONET_ENGINE_CHROMA_FACTOR = "monet_engine_chroma_factor";
+
+        /**
+         * Custom lightness scale (default 0)
+         * @hide
+         */
+        @Readable
+        public static final String MONET_ENGINE_LINEAR_LIGHTNESS = "monet_engine_linear_lightness";
+
+        /**
+         * Brightness (default 425, range 0-1000; depends on custom lightness)
+         * @hide
+         */
+        @Readable
+        public static final String MONET_ENGINE_WHITE_LUMINANCE = "monet_engine_white_luminance_user";
 
         /**
          * These entries are considered common between the personal and the managed profile,
@@ -17547,6 +17608,18 @@ public final class Settings {
         public static final String NR_NSA_TRACKING_SCREEN_OFF_MODE =
                 "nr_nsa_tracking_screen_off_mode";
 
+	/**
+         * The amount of time in milliseconds before wifi is turned off
+         * @hide
+         */
+        public static final String WIFI_OFF_TIMEOUT = "wifi_off_timeout";
+
+        /**
+         * The amount of time in milliseconds before bluetooth is turned off
+         * @hide
+         */
+        public static final String BLUETOOTH_OFF_TIMEOUT = "bluetooth_off_timeout";
+
         /**
          * Whether to show People Space.
          * Values are:
@@ -18174,6 +18247,13 @@ public final class Settings {
         @SdkConstant(SdkConstant.SdkConstantType.ACTIVITY_INTENT_ACTION)
         public static final String ACTION_VOLUME =
                 "android.settings.panel.action.VOLUME";
+
+        /**
+         * @hide
+         */
+        public static final String ACTION_APP_VOLUME =
+                "android.settings.panel.action.APP_VOLUME";
+
     }
 
     /**

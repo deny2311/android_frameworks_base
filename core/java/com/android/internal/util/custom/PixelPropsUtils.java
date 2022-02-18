@@ -16,6 +16,7 @@
 package com.android.internal.util.custom;
 
 import android.os.Build;
+import android.os.SystemProperties;
 import android.util.Log;
 
 import java.lang.reflect.Field;
@@ -65,6 +66,13 @@ public class PixelPropsUtils {
             "com.google.android.android.contacts",
             "com.google.android.android.apps.messaging",
 	    "com.google.android.gm"
+    };
+	
+	private static final String[] streamingPackagesToChange = {
+            "com.amazon.avod.thirdpartyclient",
+            "com.disney.disneyplus",
+            "com.netflix.mediaclient",
+            "in.startv.hotstar"
     };
 
     private static final String[] packagesToKeep = {
@@ -125,14 +133,14 @@ public class PixelPropsUtils {
         propsToChangePixel6.put("DEVICE", "raven");
         propsToChangePixel6.put("PRODUCT", "raven");
         propsToChangePixel6.put("MODEL", "Pixel 6 Pro");
-        propsToChangePixel6.put("FINGERPRINT", "google/raven/raven:12/SQ1D.220105.007/8030436:user/release-keys");
+        propsToChangePixel6.put("FINGERPRINT", "google/raven/raven:12/SQ1D.220205.003/8069835:user/release-keys");
         propsToChangePixel5 = new HashMap<>();
         propsToChangePixel5.put("BRAND", "google");
         propsToChangePixel5.put("MANUFACTURER", "Google");
         propsToChangePixel5.put("DEVICE", "redfin");
         propsToChangePixel5.put("PRODUCT", "redfin");
         propsToChangePixel5.put("MODEL", "Pixel 5");
-        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:12/SQ1A.220105.002/7961164:user/release-keys");
+        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:12/SQ1A.220205.002/8010174:user/release-keys");
         propsToChangePixelXL = new HashMap<>();
 	propsToChangePixelXL.put("BRAND", "google");
         propsToChangePixelXL.put("MANUFACTURER", "Google");
@@ -158,7 +166,11 @@ public class PixelPropsUtils {
             return;
         }
         if (packageName.startsWith("com.google.")
-                || Arrays.asList(extraPackagesToChange).contains(packageName)) {
+                || Arrays.asList(extraPackagesToChange).contains(packageName)
+                || Arrays.asList(streamingPackagesToChange).contains(packageName)) {
+                final String streamPropSpoof = SystemProperties.get("persist.sys.stream", "1");
+                boolean dontSpoofStream = ("0".equals(streamPropSpoof)) ? true : false;
+                if (dontSpoofStream && Arrays.asList(streamingPackagesToChange).contains(packageName)) return;
             Map<String, Object> propsToChange = propsToChangePixel6;
 
             if (Arrays.asList(packagesToChangePixel5).contains(packageName)) {
@@ -166,7 +178,14 @@ public class PixelPropsUtils {
             }
   
             if (Arrays.asList(packagesToChangePixelXL).contains(packageName)) {
-                propsToChange = propsToChangePixelXL;
+                final String useSpoof = SystemProperties.get("persist.sys.photo", "1");
+                boolean enable = ("1".equals(useSpoof)) ? true : false;
+                if (!enable && packageName != null &&
+                        packageName.equals("com.google.android.apps.photos")) {
+                    propsToChange = propsToChangePixel6;
+                } else {
+                    propsToChange = propsToChangePixelXL;
+                }
             }
 
             if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
