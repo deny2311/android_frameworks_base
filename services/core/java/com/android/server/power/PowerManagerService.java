@@ -748,7 +748,6 @@ public final class PowerManagerService extends SystemService
     // button on touch
     private boolean mButtonBacklightOnTouchOnly;
     // timeout for button backlight automatic turning off
-    private int mButtonTimeout;
     private boolean mButtonTimeoutEnabled;
     private int mEvent;
 
